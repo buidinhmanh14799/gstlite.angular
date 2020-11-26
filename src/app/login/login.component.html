@@ -1,0 +1,35 @@
+<app-header title="Mobile Store" subtitle="" button=""></app-header>
+
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h4>Please sign in</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group" style="margin-bottom: 0rem;">
+            <input type="text" class="form-control" formControlName="userName" id="inputUser" placeholder="User Name"
+              [(ngModel)]="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" required />
+            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.userName.errors.required">Username is required</div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;margin-bottom: 0rem;">
+            <input type="password" class="form-control" formControlName="passWord" id="inputPassword"
+              placeholder="Password" [(ngModel)]="passWord" [ngClass]="{ 'is-invalid': submitted && f.passWord.errors }"
+              required />
+            <div *ngIf="submitted && f.passWord.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.passWord.errors.required">Password is required</div>
+            </div>
+          </div>
+          <label class="text-danger">{{ loginfail }}</label>
+          <button type="submit" class="btn btn-success btn-md btn-block">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

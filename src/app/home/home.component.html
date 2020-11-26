@@ -1,0 +1,40 @@
+<app-header title='Mobile Store' button='view-cart' title="Prodcuts" subtitle="All the available products in our store"></app-header>
+<div class="container">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." [(ngModel)]="productName"
+      aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-success" type="button" (click)="search(productName)">Search</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div *ngFor='let item of items' class="col-lg-3 mb-4">
+          <div class="card h-100">
+            <h4 class="card-title" style="margin-top: 10px; margin-left: 10px;">{{item.name}}</h4>
+            <img class="card-img-top" style="padding: 10px;" src={{item.image}} width="100%" alt="{{item.name}}">
+            <div style="display: grid; padding: 10px;">
+              <span class="card-text">{{item.description}}</span>
+              <span> {{item.price}}</span>
+              <span> {{item.unitInStock}} unit in stock</span>
+            </div>
+            <div class="card-footer" style="margin: 10px;" class="action">
+              <button (click)='goDetail(item)' class="btn btn-primary">Details</button>
+              <button (click)='addToCart(item)' class="add-to-cart btn"
+                style="margin-left: 10px;background-color:orange;color: white;">Order Now</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->

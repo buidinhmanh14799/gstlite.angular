@@ -1,0 +1,102 @@
+<app-header title="Mobile Store" subtitle="Add products" title="Products" isAdmin="true"></app-header>
+<div class="container">
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <span class="panel-title" style="font-size: large;">Add new product</span>
+      <hr>
+    </div>
+    <div class="panel-body" style="padding-bottom: 100px;">
+      <form (ngSubmit)="addProduct()" [formGroup]="addProductForm" class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="name" class="col-sm-3 control-label" style="text-align: right;">Product Name</label>
+          <input type="text" class="col-sm-6 form-control" style="display: initial;" formControlName="name" name="name"
+            id="name" placeholder="Tên sản phẩm" required [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.name.errors.required">Product Name is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="price" class="col-sm-3 control-label" style="text-align: right;">Unit Price</label>
+          <input type="number" class="col-sm-6 form-control" style="display: initial;" formControlName="price"
+            name="price" id="price" placeholder="Giá" required
+            [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+          <div *ngIf="submitted && f.price.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.price.errors.required">Unit Price is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="unitInStock" class="col-sm-3 control-label" style="text-align: right;">Units In
+            Stock</label>
+          <input type="number" class="col-sm-6 form-control" style="display: initial;" name="unitInStock"
+            id="unitInStock" formControlName="unitInStock" placeholder="Số lượng" required
+            [ngClass]="{ 'is-invalid': submitted && f.unitInStock.errors }">
+          <div *ngIf="submitted && f.unitInStock.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.unitInStock.errors.required">Units In Stock is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="description" class="col-sm-3 control-label"
+            style="text-align: right; float: left;">Description</label>
+          <textarea name="description" class="col-sm-6 form-control" style="display: initial;" id="description"
+            formControlName="description" placeholder="Mô tả" required
+            [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.description.errors.required">Description is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="manufacturer" class="col-sm-3 control-label" style="text-align: right;">Manufacturer</label>
+          <input type="text" class="col-sm-6 form-control" style="display: initial;" formControlName="manufacturer"
+            name="manufacturer" id="manufacturer" placeholder="NSX" required
+            [ngClass]="{ 'is-invalid': submitted && f.manufacturer.errors }">
+          <div *ngIf="submitted && f.manufacturer.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.manufacturer.errors.required">Manufacturer is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="category" class="col-sm-3 control-label" style="text-align: right;">Category</label>
+          <input type="text" class="col-sm-6 form-control" style="display: initial;" formControlName="category"
+            name="category" id="category" placeholder="Loại" required
+            [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+          <div *ngIf="submitted && f.category.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.category.errors.required">Category is required</div>
+          </div>
+        </div> <!-- form-group // -->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label" style="text-align: right;">Condition</label>
+          <label for="name" class="radio-inline" style="padding-right: 15px;">
+            <input type="radio" name="productCondition" formControlName="productCondition" id="inlineRadio1"
+              value="new"> New
+          </label>
+          <label class="radio-inline" style="padding-right: 15px;">
+            <input type="radio" formControlName="productCondition" name="productCondition" id="inlineRadio2"
+              value="old"> Old
+          </label>
+          <label class="radio-inline">
+            <input type="radio" formControlName="productCondition" name="productCondition" id="inlineRadio3"
+              value="refurbished"> Refurbished
+          </label>
+
+          <div *ngIf="submitted && f.productCondition.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.productCondition.errors.required">Product Condition is required</div>
+          </div>
+        </div> <!-- form-group // -->
+        <div class="form-group">
+          <label for="file_img" class="col-sm-3 control-label" style="text-align: right;">Product Image File</label>
+          <input type="file" id="file_img" name="file_img" formControlName="image" accept="image/png, image/jpeg"
+            [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="fileProgress($event)">
+          <div *ngIf="submitted && f.image.errors" class="invalid-feedback" style="text-align: center;">
+            <div *ngIf="submitted && f.image.errors.required">Product Image File is required</div>
+          </div>
+        </div>
+        <div class="form-group" style="padding-top: 15px;">
+          <label class="col-sm-3 control-label" style="text-align: right;"></label>
+          <button type="submit" class="btn btn-primary">Add Product</button>
+        </div>
+      </form>
+
+    </div><!-- panel-body // -->
+  </section><!-- panel// -->
+
+</div> <!-- container// -->

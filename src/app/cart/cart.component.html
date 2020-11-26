@@ -1,0 +1,50 @@
+<app-header title="Mobile Store" title="Cart" subtitle="All the selected products in your cart"></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <button type="button" class="btn btn-danger" (click)='clearCart()'>
+        Clear <span class="glyphicon glyphicon-play"></span>
+      </button>
+      <button type="button" class="btn btn-success btn-default" style="float: right;" (click)='clearCart()'>
+        Checkout <span class="glyphicon glyphicon-play"></span> </button>
+      <table class="table table-hover" style="font-size: small;">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{item.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.price * item.quantity}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="removeFromCart(item)">
+                <span class="glyphicon glyphicon-remove"></span> Remove
+              </button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>   </td>
+            <td>
+              <p>Grand Total:</p>
+            </td>
+            <td>
+              {{ total }}
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-success" routerLink="" routerLinkActive="Active">
+        Continue Shopping
+      </button> 
+    </div>
+
+  </div>
+</div>
