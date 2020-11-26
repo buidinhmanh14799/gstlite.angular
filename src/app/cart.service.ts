@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../app/model'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private urlAPI = 'http://127.0.0.1:8080';
-  constructor(private http: HttpClient){};
+  constructor(private http: HttpClient) { };
   addToCart(product) {
-
     var cartItem = new CartItem();
     cartItem.id = product.id;
     cartItem.name = product.name;
@@ -28,7 +26,13 @@ export class CartService {
         console.log(product);
 
         if (products[i].id === cartItem.id) {
-          products[i].quantity += 1;
+          if ((product.unitInStock >= products[i].quantity + 1)) {
+            products[i].quantity += 1;
+          }
+          else {
+            alert("Out of stock!")
+            return false;
+          }
           flag = true;
           break;
         }
@@ -38,6 +42,7 @@ export class CartService {
       }
     }
     localStorage.setItem('cart', JSON.stringify(products));
+    return true;
   }
   removeFromCart(product) {
     var temps = []

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../addproduct/product.service'
 import { Product } from '../model';
 import { Router } from '@angular/router'
-import {CartService} from '../cart.service'
+import { CartService } from '../cart.service'
+import { SyncAsync } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   products;
   bool = true;
   items = []
-  constructor(private productService: ProductService, private router: Router,private cartService: CartService) { }
+  constructor(private productService: ProductService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getAllItem(this.bool);
@@ -24,11 +25,10 @@ export class HomeComponent implements OnInit {
     if (bool == true) {
       this.products = this.productService.getAllProduct().subscribe(
         (data) => {
-          this.items= [];
+          this.items = [];
           if (data != null) {
             data.forEach(element => {
-              if(element.unitInStock > 0)
-              {
+              if (element.unitInStock > 0) {
                 this.items.push(element);
               }
             });
@@ -59,9 +59,10 @@ export class HomeComponent implements OnInit {
     )
     console.log(this.items);
   }
-  public addToCart(item)
-  {
-      this.cartService.addToCart(item);
+  public addToCart(item) {
+    const status = this.cartService.addToCart(item);
+    if (status) {
       window.alert("add " + item.name + " to cart")
+    }
   }
 }

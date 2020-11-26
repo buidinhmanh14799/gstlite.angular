@@ -50,9 +50,10 @@ export class ProductdetailComponent implements OnInit {
     );
   }
   public addToCart(product){
-    this.cartService.addToCart(product);
-    window.alert("add " + this.product.name + " to cart")
-    this.ngOnInit();
+    const status = this.cartService.addToCart(product);
+    if (status) {
+      window.alert("add " + product.name + " to cart")
+    }
   }
 
 }
